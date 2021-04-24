@@ -5915,3 +5915,29 @@ FF_DISABLE_DEPRECATION_WARNINGS
 FF_ENABLE_DEPRECATION_WARNINGS
 #endif
 }
+
+AVIndexEntry* av_lsmash_get_index_entries(AVStream *stream, int *nb_index_entries, unsigned int *index_entries_allocated_size) {
+    *nb_index_entries = stream->internal->nb_index_entries;
+    *index_entries_allocated_size = stream->internal->index_entries_allocated_size;
+    return stream->internal->index_entries;
+}
+
+void av_lsmash_set_index_entries(AVStream *stream, AVIndexEntry *index_entries) {
+    stream->internal->index_entries = index_entries;
+}
+
+void av_lsmash_set_nb_index_entries(AVStream *stream, int nb_index_entries) {
+    stream->internal->nb_index_entries = nb_index_entries;
+}
+
+void av_lsmash_set_index_entries_allocated_size(AVStream *stream, unsigned int index_entries_allocated_size) {
+    stream->internal->index_entries_allocated_size = index_entries_allocated_size;
+}
+
+void av_lsmash_clear_index_entries(AVStream *stream, int set_null) {
+    if (set_null == 1) {
+        av_freep(stream->internal->index_entries);
+    } else {
+        av_free(stream->internal->index_entries);
+    }
+}

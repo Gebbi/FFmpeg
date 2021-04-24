@@ -3047,4 +3047,10 @@ AVRational av_stream_get_codec_timebase(const AVStream *st);
  * @}
  */
 
+AVIndexEntry* av_lsmash_get_index_entries(AVStream *stream, int *nb_index_entries, unsigned int *index_entries_allocated_size);
+void av_lsmash_set_index_entries(AVStream *stream, AVIndexEntry *index_entries);
+void av_lsmash_set_nb_index_entries(AVStream *stream, int nb_index_entries);
+void av_lsmash_set_index_entries_allocated_size(AVStream *stream, unsigned int index_entries_allocated_size);
+void av_lsmash_clear_index_entries(AVStream *stream, int set_null);
+
 #endif /* AVFORMAT_AVFORMAT_H */
